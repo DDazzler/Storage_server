@@ -14,9 +14,9 @@ jobs:
         ref: ${{github.ref}}
 
     - name: Setup Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
-        node-version: 12.x
+        node-version: 16.x
     - name: Install Dependencies
       run: |
         npm install
