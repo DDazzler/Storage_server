@@ -1,0 +1,57 @@
+<body>
+
+  <%linux_ext = ['.deb', '.sh']%>
+
+<div class="card-body">
+
+<center>
+<h1 style="font-family: 'Courier New', Courier, monospace;"> Webkorps Package List</h1>
+</center>
+
+  
+
+<center>
+<table>  
+
+    <tr>
+      <th>File Name </th>
+      <th>Platform</th>
+      <th>File Size </th>
+      <th>Last Modified </th>
+      <th>Actions </th>
+    </tr>
+
+  <% @files.each do |file_path| %>
+       
+    <tr>
+        
+      <td><%= File.basename(file_path) %></td>
+      <td><%=linux_ext.include?(File.extname(file_path)) ? 'Linux' : 'Windows'%> </td>
+      <td><%=  '%.2f' % (File.size(file_path).to_f / 2**20) %> MB</td>
+      <td><%= File.atime(file_path).strftime('%I:%M %p %d %B %Y') %></td>
+       <td><%= link_to "Download", download_path(file: file_path), class:"download-link" %></td>
+   
+    </tr>
+
+    <style>
+    
+    td,
+    th {
+        border: 0px solid;
+        padding: 10px;
+    }
+
+    table {
+        text-align: center;
+    }
+</style>
+         
+  <% end %>
+
+  
+ 
+</table>
+</div>
+</center>
+</body>
+</html>
