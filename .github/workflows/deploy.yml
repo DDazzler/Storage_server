@@ -23,4 +23,6 @@ jobs:
         bundle install
     - name: Deploy
       run: |
-        ssh server@125.99.200.202 "cd /home/server/ALL\ SERVER\ CODES/file-server-code && git pull && bundle install && RAILS_ENV=production rails assets:precompile && touch tmp/restart.txt"
+        sudo apt-get update
+        sudo apt-get install -y sshpass
+        sshpass -p "$SYSTEM_PASSWORD" ssh -p 6000 server@125.99.200.202 "cd /home/server/ALL\ SERVER\ CODES/file-server-code && git pull && bundle install && RAILS_ENV=production rails assets:precompile && touch tmp/restart.txt"
