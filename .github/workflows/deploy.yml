@@ -10,10 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        ref: ${{github.ref}}
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 16.x
     - name: Install Dependencies
       run: |
-        sudo apt-get update
+        npm install
         bundle install
     - name: Deploy
       run: |
-        ssh server@125.99.200.202 "cd /home/server/ALL\ SERVER\ CODES/file-server-code && git pull && bundle install && yarn install && RAILS_ENV=production rails assets:precompile && touch tmp/restart.txt"
+        ssh server@125.99.200.202 "cd /home/server/ALL\ SERVER\ CODES/file-server-code && git pull && bundle install && RAILS_ENV=production rails assets:precompile && touch tmp/restart.txt"
