@@ -9,9 +9,6 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Install sshpass
-        run: sudo apt-get install -y sshpass
-
       - name: Run command on remote server
-      #run: sshpass -p "Webkorps@123456" ssh -p 5001 server@125.99.200.202 "cd /home/server/ && mkdir TESTFOLDERWITHGITHUB"
+        #run: sshpass -p "Webkorps@123456" ssh -p 5001 server@125.99.200.202 "cd /home/server/ && mkdir TESTFOLDERWITHGITHUB"
         run: cd /home/server/ALL\ SERVER\ CODES/file-server-code/ && ./STARTSERVER.sh
