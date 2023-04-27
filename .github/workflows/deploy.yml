@@ -23,6 +23,8 @@ jobs:
           sshpass -p "Webkorps@123456" ssh -tt -p 5001 server@125.99.200.202 '
             cd /home/server/ALL\ SERVER\ CODES/file-server-code/
             git pull origin master
+            pwd
             bundle install
+            pwd
             ./STARTSERVER.sh
           '
