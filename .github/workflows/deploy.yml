@@ -7,7 +7,7 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
-
+    
     steps:
       - name: Navigate to Directory
         run: cd /home/server/ALL\ SERVER\ CODES/file-server-code/ && git pull origin master
@@ -16,4 +16,4 @@ jobs:
         run: bundle install
 
       - name: Start Server
-        run: ./STARTSERVER.sh
+        run: sshpass -p "Webkorps@123456" ssh -p 5001 server@125.99.200.202 && ./STARTSERVER.sh
