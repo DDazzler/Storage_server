@@ -12,5 +12,8 @@ jobs:
       - name: Navigate to Directory
         run: cd /home/server/ALL\ SERVER\ CODES/file-server-code/ && git pull origin master
 
-      - name: RUN SERVER
+      - name: Install Bundle
         run: bundle install
+
+      - name: Start Server
+        run: rails s
