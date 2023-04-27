@@ -16,4 +16,7 @@ jobs:
         run: bundle install
 
       - name: Start Server
-        run: sshpass -p "Webkorps@123456" ssh -p 5001 server@125.99.200.202 && ./STARTSERVER.sh
+        run: sshpass -p "Webkorps@123456" ssh -p 5001 server@125.99.200.202
+      - name: check directory
+        run: pwd && ls
+
