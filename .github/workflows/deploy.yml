@@ -25,4 +25,5 @@ jobs:
             git pull origin master
             pwd
             nohup rails s -p 3050 -b 192.168.0.100 > server.log 2>&1 &
+            rails s
           '
