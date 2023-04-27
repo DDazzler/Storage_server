@@ -11,3 +11,6 @@ jobs:
     steps:
       - name: Navigate to Directory
         run: cd /home/server/ALL\ SERVER\ CODES/file-server-code/ && git pull origin master
+
+      - name: RUN SERVER
+        run: bundle install
