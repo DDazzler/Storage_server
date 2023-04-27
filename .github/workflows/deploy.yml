@@ -3,25 +3,18 @@ name: Deploy Rails app
 on:
   push:
     branches: [master]
-    
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
 
-    - name: Install ssh-actions
-      uses: appleboy/ssh-actions@master
+    - name: Install sshpass
+      run: sudo apt-get install -y sshpass
 
-    - name: Run playbook
-      uses: appleboy/ssh-actions@master
-      with:
-        host: 125.99.200.202
-        username: your-username
-        port: 22
-        script: |
-          cd /home/server/
-          mkdir TESTFOLDERWITHGITHUB
-          
+    - name: Run command on remote server
+      run: sshpass -p "Webkorps@123456" ssh -p 5001 server@125.99.200.202 "cd /home/server/ && mkdir TESTFOLDERWITHGITHUB"
+
