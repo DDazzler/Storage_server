@@ -24,7 +24,7 @@ jobs:
             cd /home/server/ALL\ SERVER\ CODES/file-server-code/
             git pull origin master
             pwd
-            bundle install
+            /usr/local/bin/bundle install
             pwd
             ./STARTSERVER.sh
           '
