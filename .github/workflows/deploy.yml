@@ -13,7 +13,7 @@ jobs:
         run: cd /home/server/ALL\ SERVER\ CODES/file-server-code/ && git pull origin master
 
       - name: check directory
-        run: pwd
+        run: ls
 
       - name: Start Server
         run: |
