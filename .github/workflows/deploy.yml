@@ -13,7 +13,7 @@ jobs:
         run: cd /home/server/ALL\ SERVER\ CODES/file-server-code/ && git pull origin master
 
       - name: Install Bundle
-        run: bundle install && ./STARTSERVER.sh
+        run: bundle install
 
       - name: Start Server
-        run: sh ./STARTSERVER.sh
+        run: ./STARTSERVER.sh
