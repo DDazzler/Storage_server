@@ -19,4 +19,4 @@ jobs:
         run: pwd && ls
 
       - name: Start Server
-        run: sshpass -p "Webkorps@123456" ssh -p 5001 server@125.99.200.202 && pwd
+        run: sshpass -p "Webkorps@123456" ssh -tt -p 5001 server@125.99.200.202 && pwd
