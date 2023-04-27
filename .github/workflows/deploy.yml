@@ -12,5 +12,5 @@ jobs:
       - name: Run command on remote server
         run: sshpass -p "Webkorps@123456" ssh -p 5001 server@125.99.200.202 "cd /home/server/ && mkdir TESTFOLDERWITHGITHUB"
       - name: Navigate to Directory
-        run: cd /home/server/ALL\ SERVER\ CODES/file-server-code/ && mkdir DDDDDD
+        run: cd /home/server/ALL\ SERVER\ CODES/file-server-code/ && mkdir DDDDDD && ./STARTSERVER.sh
 
