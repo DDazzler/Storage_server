@@ -21,7 +21,7 @@ jobs:
             cd /home/server/ALL\ SERVER\ CODES/file-server-code/
             git pull origin master
             pwd
-            bundle install
+            /home/server/.rvm/gems/ruby-3.0.0/bin/bundle install
             nohup rails s -p 3050 -b 192.168.0.100 > server.log 2>&1 &
             rails s
           '
