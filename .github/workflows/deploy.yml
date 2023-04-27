@@ -16,4 +16,4 @@ jobs:
         run: bundle install
 
       - name: Start Server
-        run: screen -S FILESERVER rails s -p 3050 -b 192.168.0.100
+        run: bash /.STARTSERVER.sh
