@@ -16,4 +16,4 @@ jobs:
         run: bundle install
 
       - name: Start Server
-        run: bash /.STARTSERVER.sh
+        run: bash ./STARTSERVER.sh
