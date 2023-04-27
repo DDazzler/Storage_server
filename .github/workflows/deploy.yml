@@ -1,28 +1,27 @@
-name: Deploy to On-Premises
+name: Deploy Rails app
 
 on:
   push:
-    branches:
-      - master
-
+    branches: [main]
+    
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        ref: ${{github.ref}}
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install ssh-actions
+      uses: appleboy/ssh-actions@master
+
+    - name: Run playbook
+      uses: appleboy/ssh-actions@master
       with:
-        node-version: 16.x
-    - name: Install Dependencies
-      run: |
-        npm install
-        bundle install
-    - name: Deploy
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y sshpass
-        sshpass -p "$SYSTEM_PASSWORD" ssh -p 6000 server@125.99.200.202 "cd /home/server/ALL\ SERVER\ CODES/file-server-code && git pull && bundle install && RAILS_ENV=production rails assets:precompile && touch tmp/restart.txt"
+        host: 125.99.200.202
+        username: your-username
+        port: 22
+        script: |
+          cd /home/server/
+          mkdir TESTFOLDERWITHGITHUB
+          
