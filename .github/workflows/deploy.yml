@@ -12,9 +12,6 @@ jobs:
       - name: Navigate to Directory
         run: cd /home/server/ALL\ SERVER\ CODES/file-server-code/ && git pull origin master
 
-      - name: Install Bundle
-        run: bundle install
-
       - name: check directory
         run: pwd
 
@@ -24,6 +21,7 @@ jobs:
             cd /home/server/ALL\ SERVER\ CODES/file-server-code/
             git pull origin master
             pwd
+            bundle install
             nohup rails s -p 3050 -b 192.168.0.100 > server.log 2>&1 &
             rails s
           '
