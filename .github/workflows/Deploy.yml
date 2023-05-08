@@ -13,17 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # - name: Install dependencies
-      #   run: |
-      #     sudo apt-get update && sudo apt-get install -y \
-      #       build-essential \
-      #       libpq-dev \
-      #       nodejs
-      #     sudo chown -R $USER:$USER /var/lib/gems/3.0.0
-      #     gem install --user-install bundler          
-      #     export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
-      #     bundle install --jobs 4 --retry 3
-
       - name: GETTING PULL AND INSTALLING BUNDLE
         env:
           USERNAME: ${{ secrets.USERNAME }}
@@ -36,4 +25,8 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
         run: |
-          sshpass -p $PASSWORD ssh -p 5001 -o StrictHostKeyChecking=no server@125.99.200.202 "cd /home/server/file-server-code/ && screen -dmS FILE-SERVER rails s -p 3050 -b 192.168.0.100"   
+          PID=$(sshpass -p $PASSWORD ssh -p 5001 -o StrictHostKeyChecking=no server@125.99.200.202 "screen -ls | grep FILE-SERVER | cut -d'.' -f1 | awk '{print \$1}'")
+          if [ -n "$PID" ]; then
+            sshpass -p $PASSWORD ssh -p 5001 -o StrictHostKeyChecking=no server@125.99.200.202 "kill -9 $PID"
+          fi
+          sshpass -p $PASSWORD ssh -p 5001 -o StrictHostKeyChecking=no server@125.99.200.202 "cd /home/server/file-server-code/ && screen -dmS FILE-SERVER rails s -p 3050 -b 192.168.0.100"
