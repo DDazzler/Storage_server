@@ -20,7 +20,7 @@ jobs:
             libpq-dev \
             nodejs
           gem install bundler
-          bundle install --jobs 4 --retry 3
+          sudo bundle install --jobs 4 --retry 3
 
       - name: Build and package application
         run: |
