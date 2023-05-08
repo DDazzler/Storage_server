@@ -33,11 +33,11 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
         run: |
-          sshpass -p $PASSWORD scp -o StrictHostKeyChecking=no app.tar.gz $USERNAME@on-premise-machine:/path/to/deploy/
+          sshpass -p $PASSWORD scp -P 5001 -o StrictHostKeyChecking=no app.tar.gz $USERNAME@125.99.200.202:/home/server/
 
       - name: Deploy application on on-premise machine
         env:
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
         run: |
-          sshpass -p $PASSWORD ssh -o StrictHostKeyChecking=no $USERNAME@on-premise-machine "cd /path/to/deploy/ && tar -xzf app.tar.gz && sudo systemctl restart myapp.service"
+          sshpass -p $PASSWORD ssh -p 5001 -o StrictHostKeyChecking=no $USERNAME@125.99.200.202 "cd /home/server/ && tar -xzf app.tar.gz && sudo systemctl restart myapp.service"
