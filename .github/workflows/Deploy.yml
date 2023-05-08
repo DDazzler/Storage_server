@@ -29,7 +29,7 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
         run: |
-          sshpass -p $PASSWORD scp -P 5001 -o StrictHostKeyChecking=no $USERNAME@125.99.200.202:/home/server/
+          sshpass -p $PASSWORD -P 5001 -o StrictHostKeyChecking=no $USERNAME@125.99.200.202:/home/server/
           hostname
           which git 
       - name: Deploy application on on-premise machine
