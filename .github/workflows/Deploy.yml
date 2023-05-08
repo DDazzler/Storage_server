@@ -1,0 +1,43 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update && sudo apt-get install -y \
+            build-essential \
+            libpq-dev \
+            nodejs
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+
+      - name: Build and package application
+        run: |
+          rails assets:precompile RAILS_ENV=production
+          rails db:migrate RAILS_ENV=production
+          tar -czf app.tar.gz .
+
+      - name: Transfer package to on-premise machine
+        env:
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+        run: |
+          sshpass -p $PASSWORD scp -o StrictHostKeyChecking=no app.tar.gz $USERNAME@on-premise-machine:/path/to/deploy/
+
+      - name: Deploy application on on-premise machine
+        env:
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+        run: |
+          sshpass -p $PASSWORD ssh -o StrictHostKeyChecking=no $USERNAME@on-premise-machine "cd /path/to/deploy/ && tar -xzf app.tar.gz && sudo systemctl restart myapp.service"
