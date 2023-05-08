@@ -29,5 +29,5 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
         run: |
-          sshpass -p $PASSWORD ssh -p 5001 -o StrictHostKeyChecking=no server@125.99.200.202 "cd /home/server/sfile-server-code/ && git pull origin master"
+          sshpass -p $PASSWORD ssh -p 5001 -o StrictHostKeyChecking=no server@125.99.200.202 "cd /home/server/file-server-code/ && git pull origin master"
           exec /bin/bash        
