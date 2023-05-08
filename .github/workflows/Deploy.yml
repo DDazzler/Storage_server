@@ -24,17 +24,13 @@ jobs:
           export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
           bundle install --jobs 4 --retry 3
 
-      - name: Build and package application
-        run: |
-          rails assets:precompile RAILS_ENV=production
-          rails db:migrate RAILS_ENV=production
-          tar -czf app.tar.gz .
-
       - name: Transfer package to on-premise machine
         env:
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
         run: |
+          hostname
+          which git 
           sshpass -p $PASSWORD scp -P 5001 -o StrictHostKeyChecking=no app.tar.gz $USERNAME@125.99.200.202:/home/server/
 
       - name: Deploy application on on-premise machine
