@@ -29,8 +29,8 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
         run: |
-          sshpass -p $PASSWORD -P 5001 $USERNAME@125.99.200.202:/home/server/
-          hostname
+          sshpass -p $PASSWORD -P 5001 $USERNAME@125.99.200.202 \
+          hostname \
           which git 
       - name: Deploy application on on-premise machine
         env:
