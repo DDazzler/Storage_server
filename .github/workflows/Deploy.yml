@@ -20,8 +20,7 @@ jobs:
             libpq-dev \
             nodejs
           sudo chown -R $USER:$USER /var/lib/gems/3.0.0
-          gem install --user-install
-          gem install bundler
+          gem install --user-install bundler
           bundle install --jobs 4 --retry 3
 
       - name: Build and package application
