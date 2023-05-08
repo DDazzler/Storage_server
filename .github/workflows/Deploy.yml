@@ -13,26 +13,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get update && sudo apt-get install -y \
-            build-essential \
-            libpq-dev \
-            nodejs
-          sudo chown -R $USER:$USER /var/lib/gems/3.0.0
-          gem install --user-install bundler          
-          export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
-          bundle install --jobs 4 --retry 3
+      # - name: Install dependencies
+      #   run: |
+      #     sudo apt-get update && sudo apt-get install -y \
+      #       build-essential \
+      #       libpq-dev \
+      #       nodejs
+      #     sudo chown -R $USER:$USER /var/lib/gems/3.0.0
+      #     gem install --user-install bundler          
+      #     export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
+      #     bundle install --jobs 4 --retry 3
 
       - name: Transfer package to on-premise machine
         env:
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
         run: |
+          sshpass -p $PASSWORD scp -P 5001 -o StrictHostKeyChecking=no app.tar.gz $USERNAME@125.99.200.202:/home/server/
           hostname
           which git 
-          sshpass -p $PASSWORD scp -P 5001 -o StrictHostKeyChecking=no app.tar.gz $USERNAME@125.99.200.202:/home/server/
-
       - name: Deploy application on on-premise machine
         env:
           USERNAME: ${{ secrets.USERNAME }}
