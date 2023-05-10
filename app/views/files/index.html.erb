@@ -15,6 +15,7 @@
 
     <tr>
       <th>File Name </th>
+      <th> Type </th>
       <th>Platform OS</th>
       <th>File Size </th>
       <th>Last Modified </th>
@@ -24,12 +25,12 @@
   <% @files.each do |file_path| %>
        
     <tr>
-        
       <td><%= File.basename(file_path) %></td>
+      <td><%= File.file?(file_path) ? 'File' : 'Folder' %></td>
       <td><%=linux_ext.include?(File.extname(file_path)) ? 'Linux' : 'Windows'%> </td>
-      <td><%=  '%.2f' % (File.size(file_path).to_f / 2**20) %> MB</td>
+      <td><%=  file_size(file_path) %></td>
       <td><%= File.atime(file_path).strftime('%I:%M %p %d %B %Y') %></td>
-       <td><%= link_to "Download", download_path(file: file_path), class:"download-link" %></td>
+       <td><%= link_to "Download", File.file?(file_path) ? download_path(file: file_path) : download_folder_path(folder_path: file_path), class:"download-link" %></td>
    
     </tr>
 

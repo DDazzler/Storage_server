@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'files#index'
   get 'files/download', to: 'files#download', as: 'download'
+  get 'files/download_folder', to: 'files#download_folder', as: 'download_folder'
 end
 
 
