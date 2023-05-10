@@ -10,7 +10,7 @@ class FilesController < ApplicationController
   end
 
   def download_folder
-    folder_path = params[:folder_path] + '/'
+    folder_path = "#{params[:folder_path]}/"
     folder_name = folder_path.split('/').last
     folder_name += '.zip'
     temp_file = Tempfile.new(folder_name)
