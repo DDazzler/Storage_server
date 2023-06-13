@@ -1,5 +1,0 @@
-{
-    "yaml.schemas": {
-        "https://json.schemastore.org/github-workflow.json": "file:///media/d/MYDATA/DevOps%20Data/File-server/.github/workflows/deploy.yml"
-    }
-}
